@@ -1,0 +1,21 @@
+CREATE TABLE employee (
+    id BIGSERIAL NOT NULL,
+    email_id VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO employee (email_id, first_name, last_name)
+VALUES
+    ('john@example.com', 'John', 'Doe'),
+    ('jane@example.com', 'Jane', 'Smith'),
+    ('bob@example.com', 'Bob', 'Johnson'),
+    ('alice@example.com', 'Alice', 'Williams'),
+    ('sam@example.com', 'Sam', 'Brown');
+
+
+GRANT ALL PRIVILEGES ON TABLE employee TO username;
+GRANT INSERT ON TABLE employee TO username;
+GRANT USAGE, SELECT ON SEQUENCE employee_id_seq TO username;
+
