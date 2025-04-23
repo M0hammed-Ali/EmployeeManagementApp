@@ -1,17 +1,14 @@
-#!/bin/bash
+# Use the official OpenJDK 17 base image
+FROM openjdk:17-jdk-slim
 
-# Variables (customize as needed)
-IMAGE_NAME=my-java-app
-CONTAINER_NAME=my-java-app-container
+# Set working directory inside the container
+WORKDIR /app
 
-# Build the Docker image
-echo "Building Docker image..."
-docker build -t $IMAGE_NAME .
+# Copy the JAR file into the container
+COPY target/springboot-backend-0.0.1-SNAPSHOT.jar app.jar
 
-# Stop and remove any existing container
-echo "Cleaning up old containers..."
-docker rm -f $CONTAINER_NAME 2>/dev/null || true
+# Expose the port your Spring Boot app runs on
+EXPOSE 8080
 
-# Run the container
-echo "Starting new container..."
-docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "app.jar"]
